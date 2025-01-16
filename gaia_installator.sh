@@ -10,6 +10,7 @@ NUM_NODES=$1
 
 wget https://raw.githubusercontent.com/predator-bites/Gaianet_LFG/main/gaia_install_1.sh -O gaia_install_1.sh
 wget https://raw.githubusercontent.com/predator-bites/Gaianet_LFG/main/gaia_install_2.sh -O gaia_install_2.sh
+sudo chmod +x gaia_install_1.sh gaia_install_2.sh
 
 # Запускаем базовую установку для каждой ноды
 for ((i=1; i<=NUM_NODES; i++)); do
