@@ -8,6 +8,9 @@ fi
 
 NUM_NODES=$1
 
+wget https://raw.githubusercontent.com/predator-bites/Gaianet_LFG/main/gaia_install_1.sh -O gaia_install_1.sh
+wget https://raw.githubusercontent.com/predator-bites/Gaianet_LFG/main/gaia_install_2.sh -O gaia_install_2.sh
+
 # Запускаем базовую установку для каждой ноды
 for ((i=1; i<=NUM_NODES; i++)); do
   INSTALL_DIR="$HOME/gaianet-$i"
@@ -18,7 +21,7 @@ for ((i=1; i<=NUM_NODES; i++)); do
   
   # Затем выполняем установку с указанием директории
   bash gaia_install_1.sh "$INSTALL_DIR"
-  
+  source ~/.bashrc
   # После этого выполняем настройку ноды с теми же параметрами
   bash gaia_install_2.sh "$i" "$INSTALL_DIR"
 done
