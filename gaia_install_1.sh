@@ -27,6 +27,7 @@ pip install faker
 # Устанавливаем последнюю версию установщика Gaianet
 curl -sSfL 'https://github.com/GaiaNet-AI/gaianet-node/releases/latest/download/install.sh' | bash -s -- --base "$INSTALL_DIR"
 
+source ~/.bashrc
 # Завершаем установку
 echo "Gaianet успешно установлен в директорию $INSTALL_DIR"
 
