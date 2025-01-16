@@ -19,7 +19,6 @@ mkdir -p "$INSTALL_DIR"
 source ~/.bashrc
 gaianet init --config "https://raw.gaianet.ai/qwen2-0.5b-instruct/config.json" --base "$INSTALL_DIR"
 
-gaianet start --base $INSTALL_DIR
 
 # Настройка конфигурации
 CONFIG_FILE="$INSTALL_DIR/config.json"
