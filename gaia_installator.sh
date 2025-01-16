@@ -9,8 +9,8 @@ fi
 NUM_NODES=$1
 
 # Проверяем, что оба необходимых скрипта существуют
-PART1="install_gaianet_part1.sh"
-PART2="install_gaianet_part2.sh"
+PART1="install_gaianet_installation_1.sh"
+PART2="install_gaianet_intallation_2.sh"
 
 if [ ! -f "$PART1" ]; then
   echo "Ошибка: $PART1 не найден. Убедитесь, что файл существует."
