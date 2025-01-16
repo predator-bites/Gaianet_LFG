@@ -145,3 +145,4 @@ echo "Запускаем скрипт в screen сессии $SESSION_NAME..."
 screen -dmS "$SESSION_NAME" bash -c "python3 $CHAT_SCRIPT"
 
 echo "Установка завершена! Скрипт общения с Gaianet AI запущен в screen сессии $SESSION_NAME."
+
