@@ -1,32 +1,26 @@
 #!/bin/bash
 
-# Проверка наличия аргумента
+# Проверка аргументов
 if [ -z "$1" ]; then
-  echo "Usage: $0 <number_of_nodes>"
+  echo "Usage: $0 <installation_directory>"
   exit 1
 fi
 
-NUM_NODES=$1
-BASE_PORT=8080  # Базовый порт для llamaedge_port
-BASE_DIR="/root/gaianet"  # Базовая директория
-INSTALL_SCRIPT="https://github.com/GaiaNet-AI/gaianet-node/releases/latest/download/install.sh"
+INSTALL_DIR=$1
 
-echo "Начинаем установку $NUM_NODES нод Gaianet (часть 1)..."
+# Создание директории установки, если она не существует
+if [ ! -d "$INSTALL_DIR" ]; then
+  echo "Создаем директорию $INSTALL_DIR..."
+  mkdir -p "$INSTALL_DIR"
+else
+  echo "Директория $INSTALL_DIR уже существует!"
+fi
 
-# Установка необходимых пакетов
-sudo apt update -y && sudo apt install -y python3-pip nano screen curl
+# Обновляем систему
+sudo apt update -y && sudo apt-get update -y
 
-for ((i=1; i<=NUM_NODES; i++)); do
-  NODE_DIR="${BASE_DIR}-${i}"
+# Устанавливаем последнюю версию установщика Gaianet
+curl -sSfL 'https://github.com/GaiaNet-AI/gaianet-node/releases/latest/download/install.sh' | bash -s -- --base "$INSTALL_DIR"
 
-  echo "Настройка директории для ноды $i: $NODE_DIR..."
-
-  # Создание директории и установка ноды
-  mkdir -p "$NODE_DIR"
-  curl -sSfL "$INSTALL_SCRIPT" | bash -s -- --base "$NODE_DIR"
-done
-
-# Инструкция по выполнению второй части
-echo "Первая часть установки завершена!"
-echo "Теперь выполните команду: source ~/.bashrc"
-echo "После этого запустите второй скрипт: ./install_gaianet_part2.sh $NUM_NODES"
+# Завершаем установку
+echo "Gaianet успешно установлен в директорию $INSTALL_DIR"
