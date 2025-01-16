@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Проверка наличия аргумента
+# Проверка аргументов
 if [ -z "$1" ]; then
   echo "Usage: $0 <number_of_nodes>"
   exit 1
@@ -8,30 +8,19 @@ fi
 
 NUM_NODES=$1
 
-# Проверяем, что оба необходимых скрипта существуют
-PART1="install_gaianet_installation_1.sh"
-PART2="install_gaianet_intallation_2.sh"
+# Запускаем базовую установку для каждой ноды
+for ((i=1; i<=NUM_NODES; i++)); do
+  INSTALL_DIR="$HOME/gaianet-$i"
+  echo "Запускаем установку для ноды $i в директорию $INSTALL_DIR..."
+  
+  # Сначала создаем директорию установки для ноды
+  mkdir -p "$INSTALL_DIR"
+  
+  # Затем выполняем установку с указанием директории
+  bash gaia_install_1.sh "$INSTALL_DIR"
+  
+  # После этого выполняем настройку ноды с теми же параметрами
+  bash gaia_install_2.sh "$i" "$INSTALL_DIR"
+done
 
-if [ ! -f "$PART1" ]; then
-  echo "Ошибка: $PART1 не найден. Убедитесь, что файл существует."
-  exit 1
-fi
-
-if [ ! -f "$PART2" ]; then
-  echo "Ошибка: $PART2 не найден. Убедитесь, что файл существует."
-  exit 1
-fi
-
-# Выполнение первой части
-echo "Запускаем первую часть установки..."
-bash "$PART1" "$NUM_NODES"
-
-# Применяем изменения в bashrc
-echo "Применяем изменения из ~/.bashrc..."
-source ~/.bashrc
-
-# Выполнение второй части
-echo "Запускаем вторую часть установки..."
-bash "$PART2" "$NUM_NODES"
-
-echo "Установка всех $NUM_NODES нод завершена!"
+echo "Установка $NUM_NODES нод завершена!"
