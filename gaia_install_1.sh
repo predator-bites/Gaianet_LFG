@@ -18,6 +18,11 @@ fi
 
 # Обновляем систему
 sudo apt update -y && sudo apt-get update -y
+sudo apt install python3-pip -y
+sudo apt install nano -y
+sudo apt install screen -y
+pip install requests 
+pip install faker 
 
 # Устанавливаем последнюю версию установщика Gaianet
 curl -sSfL 'https://github.com/GaiaNet-AI/gaianet-node/releases/latest/download/install.sh' | bash -s -- --base "$INSTALL_DIR"
