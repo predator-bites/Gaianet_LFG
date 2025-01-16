@@ -19,6 +19,8 @@ mkdir -p "$INSTALL_DIR"
 source ~/.bashrc
 gaianet init --config "https://raw.gaianet.ai/qwen2-0.5b-instruct/config.json" --base "$INSTALL_DIR"
 
+gaianet start --base "$INSTALL_DIR"
+
 # Настройка конфигурации
 CONFIG_FILE="$INSTALL_DIR/config.json"
 if [ -f "$CONFIG_FILE" ]; then
@@ -145,4 +147,6 @@ echo "Запускаем скрипт в screen сессии $SESSION_NAME..."
 screen -dmS "$SESSION_NAME" bash -c "python3 $CHAT_SCRIPT"
 
 echo "Установка завершена! Скрипт общения с Gaianet AI запущен в screen сессии $SESSION_NAME."
+
+
 
